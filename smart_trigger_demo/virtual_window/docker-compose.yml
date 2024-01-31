@@ -1,0 +1,14 @@
+version: '3'
+services:
+  virtual-window-backend:
+    build: ./backend
+    ports:
+      - 5000:5000
+      - 8765:8765
+
+  virtual-window-frontend:
+    build: ./frontend
+    ports:
+      - 3000:80
+    depends_on:
+      - virtual-window-backend

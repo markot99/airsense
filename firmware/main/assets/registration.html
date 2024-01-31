@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AirSense Configuration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            height: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0px;
+            height: 30px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #0074d9;
+            color: #fff;
+            padding: 0px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #responseMessage {
+            margin-top: 10px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to AirSense!</h1>
+    <h2>Please enter your WLAN login information and the device token. The device will close the access point and check
+        the information provided. If the access data is incorrect, the access point will be reopened.
+    </h2>
+    <h2>If you do not yet have a device token, you can create one on the AirSense website. </h2>
+    <form>
+        <label for="wifi_ssid">
+            <h2>WiFi SSID:</h2>
+        </label>
+        <input type="text" id="wifi_ssid" name="wifi_ssid" required><br><br>
+
+        <label for="wifi_password">
+            <h2>WiFi Password:</h2>
+        </label>
+        <input type="password" id="wifi_password" name="wifi_password" required><br><br>
+
+        <label for="device_token">
+            <h2>Device Token:</h2>
+        </label>
+        <input type="text" id="device_token" name="device_token" required><br><br>
+
+        <button type="button" id="submitBtn">
+            <h3>Submit</h3>
+        </button>
+    </form>
+
+    <h2 id="responseMessage"></h2>
+
+    <script>
+        document.getElementById("submitBtn").addEventListener("click", function () {
+            var data = {
+                wifi_ssid: document.getElementById("wifi_ssid").value,
+                wifi_password: document.getElementById("wifi_password").value,
+                device_token: document.getElementById("device_token").value
+            };
+
+            fetch("/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(function (response) {
+                    if (response.status === 200) {
+                        document.getElementById("responseMessage").textContent = "Data sent successfully. If your data was valid, a corresponding message will appear on the display.";
+                    } else {
+                        document.getElementById("responseMessage").textContent = "Sending the data has failed. Please try again.";
+                    }
+                })
+                .catch(function (error) {
+                    console.error("Fehler: " + error);
+                });
+        });
+    </script>
+</body>
+
+</html>

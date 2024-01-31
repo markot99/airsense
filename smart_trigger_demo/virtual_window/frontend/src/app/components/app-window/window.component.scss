@@ -1,0 +1,56 @@
+.virtual-window-open-left {
+  transform-origin: left;
+  animation: keyframes-open-left 5s ease-in-out forwards;
+}
+
+.virtual-window-close-left {
+  transform-origin: left;
+  animation: keyframes-close-left 5s ease-in-out forwards;
+}
+
+.virtual-window-open-right {
+  transform-origin: right;
+  animation: keyframes-open-right 5s ease-in-out forwards;
+}
+
+.virtual-window-close-right {
+  transform-origin: right;
+  animation: keyframes-close-right 5s ease-in-out forwards;
+}
+
+
+@keyframes keyframes-open-left {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -100%;
+  }
+}
+
+@keyframes keyframes-close-left {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 0%;
+  }
+}
+
+@keyframes keyframes-open-right {
+  from {
+    right: 0%;
+  }
+  to {
+    right: -100%;
+  }
+}
+
+@keyframes keyframes-close-right {
+  from {
+    right: -100%;
+  }
+  to {
+    right: 0%;
+  }
+}

@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  airsense-backend:
+    build: ./backend
+    container_name: airsense-backend
+    environment:
+      - AIR_SENSE_PORT=9999
+      - AIR_SENSE_MONGO_URL=mongodb://mongo:27017
+      - AIR_SENSE_SECRET=secret
+    ports:
+      - 7325:7325
+
+  mongo:
+    image: mongo:latest
+    container_name: air-mongo
+    volumes:
+      - air-data:/data/db
+    ports:
+      - 27017:27017
+
+  airsense-frontend:
+    build: ./frontend
+    container_name: airsense-frontend
+    ports:
+      - 8080:80
+    depends_on:
+      - airsense-backend
+
+volumes:
+  air-data:
+    name: air-data

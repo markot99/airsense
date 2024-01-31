@@ -1,0 +1,17 @@
+<div class="absolute -z-50 w-full h-full">
+  <img class="w-full h-full object-cover" src="/assets/images/landscape.jpg" />
+</div>
+<div class="relative w-full h-full overflow-hidden">
+  <div class="absolute left-0 w-1/2 h-full" [ngClass]="{
+    'virtual-window-open-left': windowOpenLeft,
+    'virtual-window-close-left': windowCloseLeft,
+  }">
+    <img class="w-full h-full object-cover" src="/assets/images/window-left.jpg" />
+  </div>
+  <div class="absolute right-0 w-1/2 h-full" [ngClass]="{
+    'virtual-window-open-right': windowOpenRight,
+    'virtual-window-close-right': windowCloseRight,
+  }">
+    <img class="w-full h-full object-cover" src="/assets/images/window-right.jpg" />
+  </div>
+</div>
